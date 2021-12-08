@@ -51,11 +51,11 @@ async def download(event):
             msg = await event.client.send_file(
                 Config.CHANNEL,
                 file=event.message.media
-                #caption=f"From @{sender.username}|[{event.chat_id}](tg://user?id={event.sender_id})/{event.message.id}")
+                caption=f"x")
             id_hex = hex(msg.id)[2:]
             id = f"{id_hex}/{get_file_name(msg)}"
             bot_url = f"Telegram.dog/{username_bot}?start={id_hex}"
-            await event.reply(f"Your Link Generated! 💕\n\n📥 **Download Link:** {Config.DOMAIN}/{id}\n\n**📂Share** : {bot_url}")
+            await event.reply(f"Your Link Generated! 💕\n\n📥 **Download Link:** {Config.DOMAIN}/{id}\n\n**📂 Share** : {bot_url}")
             return
 
         elif id_msg := re.search("/start (.*)", event.raw_text ):
