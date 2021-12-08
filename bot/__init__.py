@@ -51,7 +51,7 @@ async def download(event):
             msg = await event.client.send_file(
                 Config.CHANNEL,
                 file=event.message.media,
-                caption=f"From @{sender.username}|[{event.chat_id}](tg://user?id={event.sender_id})/{event.message.id}")
+                #caption=f"From @{sender.username}|[{event.chat_id}](tg://user?id={event.sender_id})/{event.message.id}")
             id_hex = hex(msg.id)[2:]
             id = f"{id_hex}/{get_file_name(msg)}"
             bot_url = f"Telegram.dog/{username_bot}?start={id_hex}"
@@ -76,12 +76,12 @@ async def download(event):
                         forward = await file.forward_to(event.chat_id)
                         id_name = f"{id_hex}/{get_file_name(msg)}"
                         bot_url = f"Telegram.dog/{username_bot}?start={id_hex}"
-                        forward_reply = await forward.reply(f"```Save The File.\n\nDeleting in 30 seconds.```\n\n📥 **Download :** {Config.DOMAIN}/{id_name}\n\n**📂Share** : {bot_url}",link_preview=False)
+                        forward_reply = await forward.reply(f"```Save The File.\n\nDeleting in 30 seconds.```\n\n📥 **Download :** {Config.DOMAIN}/{id_name}\n\n**📂 Share** : {bot_url}",link_preview=False)
                         await asyncio.sleep(20)
-                        await forward_reply.edit(f"```Save The File.\n\nDeleting in 30 seconds.\n\n```📥 **Download :** {Config.DOMAIN}/{id_name}\n\n**📂Share** : {bot_url}")
+                        await forward_reply.edit(f"```Save The File.\n\nDeleting in 10 seconds.\n\n```📥 **Download :** {Config.DOMAIN}/{id_name}\n\n**📂 Share** : {bot_url}")
                         await asyncio.sleep(10)
                         await forward.delete()
-                        await forward_reply.edit(f"**Your Generated Link! 💕**\n\n📥 **Download :** {Config.DOMAIN}/{id_name}\n\n**📂Share** : {bot_url}",link_preview=True)
+                        await forward_reply.edit(f"**Your Generated Link! 💕**\n\n📥 **Download :** {Config.DOMAIN}/{id_name}\n\n**📂 Share** : {bot_url}",link_preview=True)
                 return
         
         if pv:
