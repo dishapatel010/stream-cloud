@@ -50,8 +50,7 @@ async def download(event):
             sender = await event.get_sender()
             msg = await event.client.send_file(
                 Config.CHANNEL,
-                file=event.message.media
-                caption=f"x")
+                file=event.message.media)
             id_hex = hex(msg.id)[2:]
             id = f"{id_hex}/{get_file_name(msg)}"
             bot_url = f"Telegram.dog/{username_bot}?start={id_hex}"
