@@ -19,12 +19,12 @@ class Router:
         try:
             id = int(id_hex,16)
         except ValueError:
-            return web.HTTPNotFound()
+            return send_from_directory("html/x", "404.html")
         
         message = await self.client.get_messages(self.CHANNEL, ids=id)
 
         if not message or not message.file :
-            return send_from_directory("html/x/", "404.html")
+            return send_from_directory("html/x", "404.html")
         
         offset = request.headers.get("Range", 0)
 
