@@ -12,6 +12,9 @@ class Router:
     
     async def hello(self, request):
         return web.Response(text="Hello, world")
+    
+    def not_found(e):
+        return send_from_directory("html/x", "404.html")
 
     async def Downloader(self, request):
         id_hex = request.match_info.get("id")
@@ -19,12 +22,12 @@ class Router:
         try:
             id = int(id_hex,16)
         except ValueError:
-            return send_from_directory("html/x", "404.html")
+            return not_found(e)
         
         message = await self.client.get_messages(self.CHANNEL, ids=id)
 
         if not message or not message.file :
-            return send_from_directory("html/x", "404.html")
+            return not_found(e)
         
         offset = request.headers.get("Range", 0)
 
