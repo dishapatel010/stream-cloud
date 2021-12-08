@@ -1,4 +1,5 @@
 from aiohttp import web
+from flask import send_from_directory
 import re
 from telethon.client.downloads import MAX_CHUNK_SIZE
 
@@ -23,7 +24,7 @@ class Router:
         message = await self.client.get_messages(self.CHANNEL, ids=id)
 
         if not message or not message.file :
-            return web.HTTPNotFound()
+            return send_from_directory("html/x/", "404.html")
         
         offset = request.headers.get("Range", 0)
 
