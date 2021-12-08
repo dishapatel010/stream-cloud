@@ -40,7 +40,7 @@ async def download(event):
                     participant = event.sender_id
                     ))
             except errors.UserNotParticipantError:
-                await event.reply(f"First join to our official channel to access the bot or get the newest news about the bot\n\n@{Config.CHANNEL_USERNAME}\n\nAfter that /start the bot aging.")
+                await event.reply(f"First join to our official channel to access the bot or get the newest news about the bot\n\n@{Config.CHANNEL_USERNAME}\n\nAfter that /start the bot again.")
                 return
         
         if event.file :
@@ -51,10 +51,10 @@ async def download(event):
             msg = await event.client.send_file(
                 Config.CHANNEL,
                 file=event.message.media,
-                caption=f"@{sender.username}|[{event.chat_id}](tg://user?id={event.sender_id})/{event.message.id}")
+                caption=f"From @{sender.username}\n\nAt [{event.chat_id}](tg://user?id={event.sender_id})/{event.message.id}")
             id_hex = hex(msg.id)[2:]
             id = f"{id_hex}/{get_file_name(msg)}"
-            bot_url = f"t.me/{username_bot}?start={id_hex}"
+            bot_url = f"Telegram.dog/{username_bot}?start={id_hex}"
             await event.reply(f"Your Link Generated! 💕\n\n📥 **Download Link:** {Config.DOMAIN}/{id}\n\n**Share Url📂** : {bot_url}")
             return
 
@@ -75,17 +75,17 @@ async def download(event):
                             return await event.reply("File Not Found")
                         forward = await file.forward_to(event.chat_id)
                         id_name = f"{id_hex}/{get_file_name(msg)}"
-                        bot_url = f"t.me/{username_bot}?start={id_hex}"
-                        forward_reply = await forward.reply(f"```Save The File.\n\nDeleting in 30 seconds.```\n\n📥 **Download Link:** {Config.DOMAIN}/{id_name}\n\n**Share Url📂** : {bot_url}",link_preview=False)
+                        bot_url = f"Telegram.dog/{username_bot}?start={id_hex}"
+                        forward_reply = await forward.reply(f"```Save The File.\n\nDeleting in 30 seconds.```\n\n📥 **Download :** {Config.DOMAIN}/{id_name}\n\n**Share Url📂** : {bot_url}",link_preview=False)
                         await asyncio.sleep(20)
-                        await forward_reply.edit(f"```Save The File.\n\nDeleting in 30 seconds.\n\n```📥 **Download Link:** {Config.DOMAIN}/{id_name}\n\n🤖 : {bot_url}")
+                        await forward_reply.edit(f"```Save The File.\n\nDeleting in 30 seconds.\n\n```📥 **Download :** {Config.DOMAIN}/{id_name}\n\n🤖 : {bot_url}")
                         await asyncio.sleep(10)
                         await forward.delete()
-                        await forward_reply.edit(f"**Your Generated Link! 💕**\n\n📥 **Download Link:** {Config.DOMAIN}/{id_name}\n\n**Share Url📂** : {bot_url}",link_preview=True)
+                        await forward_reply.edit(f"**Your Generated Link! 💕**\n\n📥 **Download :** {Config.DOMAIN}/{id_name}\n\n**📂Share : {bot_url}",link_preview=True)
                 return
         
         if pv:
-            await event.reply("🌻 Hey!!\n\nAn Instant Telegram File to Link Generator Bot.\nSend me any File & see the magic ✨")
+            await event.reply("🌻 Hey!!\n\nAn Instant Telegram File to Link Generator Bot.\n\nSend me any File & see the magic ✨")
         
 
     elif event.is_channel:
