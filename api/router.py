@@ -13,7 +13,7 @@ class Router:
     async def hello(self, request):
         return web.Response(text="Hello, world")
     
-    def not_found(e):
+    async def not_found(e):
         return send_from_directory("html/x", "404.html")
 
     async def Downloader(self, request):
