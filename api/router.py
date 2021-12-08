@@ -1,5 +1,4 @@
 from aiohttp import web
-from flask import send_from_directory
 import re
 from telethon.client.downloads import MAX_CHUNK_SIZE
 
@@ -12,9 +11,6 @@ class Router:
     
     async def hello(self, request):
         return web.Response(text="Hello, world")
-    
-    async def not_found(e):
-        return send_from_directory("html/x", "404.html")
 
     async def Downloader(self, request):
         id_hex = request.match_info.get("id")
@@ -22,12 +18,12 @@ class Router:
         try:
             id = int(id_hex,16)
         except ValueError:
-            return not_found
+            return web.HTTPNotFound()
         
         message = await self.client.get_messages(self.CHANNEL, ids=id)
 
         if not message or not message.file :
-            return not_found
+            return web.HTTPNotFound()
         
         offset = request.headers.get("Range", 0)
 
