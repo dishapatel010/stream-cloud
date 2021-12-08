@@ -1,10 +1,17 @@
-FROM python
+FROM python:3.9.1-buster
 
-COPY . /app
+ENV VIRTUAL_ENV "/venv"
+RUN python -m venv $VIRTUAL_ENV
+ENV PATH "$VIRTUAL_ENV/bin:$PATH"
 
-WORKDIR /app
+RUN apt-get update && apt-get upgrade -y
+RUN python -m pip install --upgrade pip
 
-RUN pip3 install -r requirements.txt
+WORKDIR /usr/src/app
+
+COPY . .
+
+RUN pip install -U -r requirements.txt
 
 ENV PORT = 8080
 EXPOSE 8080
