@@ -22,12 +22,12 @@ class Router:
         try:
             id = int(id_hex,16)
         except ValueError:
-            return not_found(e)
+            return not_found
         
         message = await self.client.get_messages(self.CHANNEL, ids=id)
 
         if not message or not message.file :
-            return not_found(e)
+            return not_found
         
         offset = request.headers.get("Range", 0)
 
