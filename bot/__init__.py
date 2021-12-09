@@ -25,7 +25,7 @@ username_bot = client.get_me().username
 
 def get_file_name(message):
     if message.file.name:
-        return message.file.name.replace("+"," ")
+        return message.file.name.replace(" ","%20")
     ext = message.file.ext or ""
     return f"file{ext}"
 
