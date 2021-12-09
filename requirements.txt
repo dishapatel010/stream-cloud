@@ -6,4 +6,3 @@ aiohttp
 Telethon
 requests
 gunicorn
-flask
